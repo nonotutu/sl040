@@ -1,0 +1,42 @@
+#page
+  
+  .bloc.ligne
+  
+    %span{id: 'titre250'}
+      %b
+        = Container.model_name.human :count => 2
+
+    .bloc
+      #table_index
+        %table
+          %tr
+            %th= Container.human_attribute_name(:short_name)
+            %th= Container.human_attribute_name(:name)
+            %th= Container.human_attribute_name(:model)
+            %th= Container.human_attribute_name(:status)
+            %th #
+            %th
+              %i # ▣
+            %th
+              %i # ◾
+            %th
+            %th
+
+          - @containers.racine.each do |container|
+            %tr
+              %td= container.short_name
+              %td= container.name
+              %td= container.model
+              %td= container.status
+              %td.mono_droite= container.quantity
+              %td.mono_droite
+                %i= container.count_containers - 1
+              %td.mono_droite
+                %i= container.count_contents
+              %td.link= link_to t(:open), container_contents_path(container)
+              %td.link= link_to t(:show), container
+
+    .bloc
+      #links
+        - if can? :create, Container
+          = link_to t(:new_container), new_container_path

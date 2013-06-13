@@ -1,0 +1,28 @@
+%h1
+  = t(:listing)
+  %b
+    = Supplier.model_name.human :count => 2
+
+%div.one
+  %table.index
+    %tr
+      %th= Supplier.human_attribute_name(:name)
+      %th
+        %i #containers
+      %th
+        %i #purchases
+      %th
+
+    - @suppliers.each do |supplier|
+      %tr
+        %td= supplier.name
+        %td.mono_droite
+          %i= supplier.items.count
+        %td.mono_droite
+          %i= supplier.purchases.count
+        %td.link= link_to t(:show), supplier
+
+%div.one
+  .links
+    - if can? :create, Supplier
+      = link_to t(:new_supplier), new_supplier_path

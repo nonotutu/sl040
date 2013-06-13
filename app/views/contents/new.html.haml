@@ -1,0 +1,12 @@
+%h1
+  = t(:new)
+  %b
+    = Content.model_name.human
+
+%div.one
+  = render 'form'
+
+%div.one
+  .links
+    = link_to t(:back), container_contents_path(@content.container)
+

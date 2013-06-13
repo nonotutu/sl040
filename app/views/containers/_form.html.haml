@@ -1,0 +1,35 @@
+= simple_form_for @container do |f|
+  - if @container.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@container.errors.count, "error")} :"
+      %ul.base
+        - @container.errors.full_messages.each do |msg|
+          %li= msg
+
+  #table_form
+    %table
+      %tr
+        %td= f.label :pos
+        %td= f.input :pos, label: false
+      %tr
+        %td= f.label :short_name
+        %td= f.input :short_name, label: false
+      %tr
+        %td= f.label :name
+        %td= f.input :name, label: false
+      %tr
+        %td= f.label :model
+        %td= f.input :model, label: false
+      %tr
+        %td= f.label :status
+        %td= f.input :status, label: false
+      %tr
+        %td= f.label :quantity
+        %td= f.input :quantity, label: false
+      %tr
+        %td= f.label :container
+        %td= f.association :container, :include_blank => true, :collection => @containers, :label => false
+      %tr
+        %td
+        %td{:align => :right}
+          = f.submit t :save

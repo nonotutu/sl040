@@ -1,0 +1,19 @@
+%h1
+  = t(:showing)
+  %b
+    = @category
+
+%div.one
+  %table.show
+    - ['short_name', 'name'].each do |attribute|
+      %tr
+        %td= Category.human_attribute_name(attribute)
+        %td= @category.send(attribute)
+
+%div.one
+  .links
+    - if can? :edit, Category
+      = link_to t(:edit), edit_category_path(@category)
+    - if can? :destroy, Category
+      = link_to t(:destroy), @category, method: :delete, data: { confirm: 'Are you sure?' }
+    = link_to t(:back), categories_path

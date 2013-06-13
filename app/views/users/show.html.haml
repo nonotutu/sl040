@@ -1,0 +1,20 @@
+%h1
+  = t(:showing)
+  %b
+    = @user
+
+%div.one
+  %table.show
+    - ['email'].each do |attribute|
+      %tr
+        %td= User.human_attribute_name(attribute)
+        %td= @user.send(attribute)
+
+%div.one
+  .links
+    - if can? :edit, User
+      = link_to t(:edit), edit_user_path(@user)
+    - if can? :destroy, User
+      = link_to t(:destroy), @user, method: :delete, data: { confirm: 'Are you sure?' }
+    = link_to t(:back), users_path
+  

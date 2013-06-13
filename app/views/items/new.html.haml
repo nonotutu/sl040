@@ -1,0 +1,11 @@
+%h1
+  = t(:new)
+  %b
+    = Item.model_name.human
+
+%div.one
+  = render 'form'
+
+%div.one
+  .links
+    = link_to t(:back), items_path

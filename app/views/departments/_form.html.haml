@@ -1,0 +1,21 @@
+= simple_form_for @department do |f|
+  - if @department.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@department.errors.count, "error")} prohibited this department from being saved:"
+      %ul
+        - @department.errors.full_messages.each do |msg|
+          %li= msg
+  %table.form
+    %tr
+      %td= f.label :short_name
+      %td= f.input :short_name, input_html: { size: 8 }, label: false
+    %tr
+      %td= f.label :name
+      %td= f.input :name, input_html: { size: 24 }, label: false
+    %tr
+      %td= f.label :color
+      %td= f.association :color, label: false, include_blank: false
+    %tr
+      %td
+      %td{:align => :right}
+        = f.submit t(:save)

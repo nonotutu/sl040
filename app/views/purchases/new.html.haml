@@ -1,0 +1,15 @@
+#page
+  
+  .bloc.ligne
+    %span{id: 'titre250'}
+      = @purchase.item
+      \:
+      %b
+        = t(:new_purchase)
+
+    .bloc
+      = render 'form'
+
+    .bloc
+      #links
+        = link_to t(:back), purchases_path

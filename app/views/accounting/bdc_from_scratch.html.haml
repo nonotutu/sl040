@@ -1,0 +1,61 @@
+#page
+  #table_form
+    = form_tag 'generate_bdc_from_scratch' do
+      %table
+        / %tr
+        /   %td document :
+        /   %td
+        /     = radio_button_tag 'type', 'devis'
+        /     devis
+        /     = radio_button_tag 'type', 'facture'
+        /     facture
+        /     = radio_button_tag 'type', 'rappel'
+        /     rappel
+        %tr
+          %td= "#{Department.model_name.human} :"
+          %td= collection_select :department, :id, Department.all, :id, :name, include_blank: true
+        / %tr
+        /   %td adresse :
+        /   %td= text_area_tag 'adresse', '', rows: 4, cols: 32
+        / %tr
+        /   %td lieu :
+        /   %td= text_field_tag 'lieu', '', size: 12
+
+        %tr
+          %td date :
+          %td= date_select 'date', ''
+        %tr
+          %td destinataire :
+          %td= text_area_tag 'destinataire', '', rows: 4, cols: 32
+        %tr
+          %td référence offre :
+          %td= text_field_tag 'reference_offre', '', size: 8
+
+        %tr
+          %td référence client :
+          %td= text_field_tag 'reference_client', '', size: 8
+        %tr
+          %td adresse facturation & livraison :
+          %td= text_area_tag 'adresse_fl', '', rows: 4, cols: 32
+        %tr
+          %td demandeur :
+          %td= text_area_tag 'demandeur', '', rows: 4, cols: 32
+        %tr
+          %td signature :
+          %td= text_area_tag 'signature', '', rows: 3, cols: 32
+
+        %tr
+          %td items :
+          %td
+            - 8.times do |i|
+              = text_field_tag 'ref'+i.to_s, '', size: 8, placeholder: 'référence'
+              = text_field_tag 'art'+i.to_s, '', size: 24, placeholder: 'article'
+              = text_field_tag 'cpl'+i.to_s, '', size: 24, placeholder: 'complément'
+              = number_field_tag 'price'+i.to_s, '', size: 4, placeholder: 'prix (€)'
+              = number_field_tag 'qty'+i.to_s, '', size: 2, placeholder: 'quantité'
+              = number_field_tag 'tva'+i.to_s, '', size: 2, placeholder: 'tva (%)'
+              %br
+
+        %tr
+          %td
+          %td= submit_tag 'Générer document'

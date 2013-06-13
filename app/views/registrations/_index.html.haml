@@ -1,0 +1,32 @@
+#table_index
+  %table
+    %tr
+      %th= ActNeed.model_name.human
+      %th= Volunteer.model_name.human
+      %th= Activity.human_attribute_name(:starts_at)
+      %th= Activity.human_attribute_name(:ends_at)
+      %th= Activity.human_attribute_name(:rendezvous_place)
+      %th= RegistrationStatus.model_name.human
+      %th
+      %th
+
+    - @registrations.each do |registration|
+    
+      - active = ( params[:registration].to_i == registration.id ? :selected : nil )
+  
+      %tr{ class: active }
+        %td
+          - if registration.act_need_id
+            = ActNeed.find(registration.act_need_id).name
+        %td= registration.volunteer
+        %td= registration.starts_at_formatted_s
+        %td= registration.ends_at_formatted_s
+        %td= registration.rendezvous_place
+        %td
+          - if registration.registration_status
+            = registration.registration_status.short_name
+        - unless active
+          %td.link= link_to t(:edit), activity_path(@activity.id, registration: registration.id)
+        - else
+          %td.link= link_to t(:cancel)
+        %td.link= link_to t(:destroy), [@activity, registration], method: :delete, data: { confirm: 'Are you sure?' }

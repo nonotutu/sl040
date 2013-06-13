@@ -1,0 +1,16 @@
+%ul
+
+  %li= link_to t(:home), :root
+
+  - active = action_name == 'index'          |
+    ? :active : nil                          |
+  %li.title= link_to t(:google_drive), google_drive_path, :class => active
+  
+  - active = action_name == 'dump'           |
+    ? :active : nil                          |
+  %li= link_to 'dump', google_drive_dump_path, :class => active
+  
+  - active = action_name == 'import'         |
+    ? :active : nil                          |
+  %li= link_to 'import', google_drive_import_path, :class => active
+      

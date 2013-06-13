@@ -1,0 +1,41 @@
+= simple_form_for @activity do |f|
+  - if @activity.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@activity.errors.count, "error")} prohibited this activity from being saved:"
+      %ul
+        - @activity.errors.full_messages.each do |msg|
+          %li= msg
+
+  #table_form
+    %table
+      %tr
+        %td= f.label :department_id
+        %td= f.association :department, label: false, include_blank: false
+      %tr
+        %td= f.label :name
+        %td= f.input :name, label: false
+      %tr
+        %td= f.label :place
+        %td= f.input :place, label: false
+      %tr
+        %td= f.label :address
+        %td= f.input :address, input_html: { rows: 4, cols: 40 }, label: false
+      %tr
+        %td= f.label :rendezvous_place
+        %td= f.input :rendezvous_place, label: false
+      %tr
+        %td= f.label :rendezvous_at
+        %td= f.input :rendezvous_at, minute_step: 5, label: false, include_blank: true
+      %tr
+        %td= f.label :starts_at
+        %td= f.input :starts_at, minute_step: 5, label: false
+      %tr
+        %td= f.label :ends_at
+        %td= f.input :ends_at, minute_step: 5, label: false
+      %tr
+        %td= f.label :description
+        %td= f.input :description, input_html: { rows: 6, cols: 60 }, label: false
+      %tr
+        %td
+        %td{:align => :right}
+          = f.submit t(:save)

@@ -1,0 +1,26 @@
+%h1
+  = t(:listing)
+  %b
+    = Category.model_name.human :count => 2
+
+%div.one
+  %table.index
+    %tr
+      %th= Category.human_attribute_name(:short_name)
+      %th= Category.human_attribute_name(:name)
+      %th
+        %i #◾
+      %th
+
+    - @categories.each do |category|
+      %tr
+        %td= category.short_name
+        %td= category.name
+        %td.mono_droite
+          %i= category.items.count
+        %td.link= link_to t(:show), category
+
+%div.one
+  .links
+    - if can? :create, Category
+      = link_to t(:new_category), new_category_path

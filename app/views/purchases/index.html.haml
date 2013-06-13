@@ -1,0 +1,30 @@
+#page
+
+  .bloc.ligne
+
+    %span{id: 'titre250'}
+      %b
+        = Purchase.model_name.human :count => 2
+                  
+    .bloc 
+      #table_index
+        %table
+          %tr
+            %th= Item.model_name.human
+            %th= Purchase.human_attribute_name(:number)
+            %th= Purchase.human_attribute_name(:purchased_on)
+            %th= Purchase.human_attribute_name(:active)
+            %th
+
+          - @purchases.each do |purchase|
+            %tr
+              %td= purchase.item
+              %td= purchase.number
+              %td= purchase.purchased_on
+              %td= purchase.active
+              %td.link= link_to t(:show), purchase
+    -#
+      .bloc
+        #links
+          - if can? :create, Purchase
+            = link_to t(:new_purchase), new_purchase_path

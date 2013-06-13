@@ -1,0 +1,30 @@
+%h1
+  = t(:showing)
+  %b
+    = @department
+
+%div.one
+  %table.show
+    - ['short_name', 'name', 'color'].each do |attribute|
+      %tr
+        %td= Department.human_attribute_name(attribute)
+        %td= @department.send(attribute)
+
+%div.one
+  .links
+    - if can? :edit, Department
+      = link_to t(:edit), edit_department_path(@department)
+    - if can? :destroy, Department
+      = link_to t(:destroy), @department, method: :delete, data: { confirm: 'Are you sure?' }
+    = link_to t(:back), departments_path
+
+%h2
+  = Volunteer.model_name.human :count => 2
+
+%div.two
+  %p
+    = Volunteer.human_attribute_name(:active)
+    \:
+    %b
+      = @department.volunteers.only_active.count
+

@@ -1,0 +1,55 @@
+#page
+
+  .bloc.ligne
+    %span{id: 'titre250'}
+      %b
+        = Activity.model_name.human :count => 2
+    
+    .bloc
+      #table_filter{style: 'font-size: 70%'}
+        #filter_titre
+          trier & filtrer
+        %form
+          %table.filter
+            %tr
+              %td période
+              %td
+                %select{ :name => 'periode' }
+                  - @periodes.each do |periode|
+                    %option{ :value => periode[0], :selected => ( session[:periode] == periode[0] ? 'selected' : nil) }= periode[0]
+            %tr
+              %td
+              %td
+                %input{ :type => 'submit', :value => 'filter' }
+                %form
+                  %input{ :type => 'submit', :value => 'reset', :name => 'reset' }
+      
+    .bloc
+      #table_index
+        %table
+          %tr
+            %th= Department.model_name.human
+            %th= Activity.human_attribute_name(:name)
+            %th= Activity.human_attribute_name(:starts_at)
+            %th= Activity.human_attribute_name(:ends_at)
+            %th
+              %i= ActNeed.model_name.human count: 2
+            %th
+              %i= Registration.model_name.human count: 2
+            %th
+
+          - @activities.each do |activity|
+            %tr
+              %td= activity.department.short_name
+              %td= activity.name
+              %td= activity.starts_at.to_formatted_s(:cust_short)
+              %td= activity.ends_at.to_formatted_s(:cust_short)
+              %td= activity.act_needs.count
+              %td= activity.registrations.count
+              %td.link= link_to t(:show), activity
+      
+    .bloc
+      #links
+        - if can? :create, Activity
+          = link_to t(:new_activity), new_activity_path
+        = link_to t(:metro_view), activities_metro_path

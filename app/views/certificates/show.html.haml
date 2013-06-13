@@ -1,0 +1,20 @@
+%h1
+  = t(:showing)
+  %b
+    = @certificate
+
+%div.one
+  %table.show
+    - [:volunteer, :training, :number, :issued_on].each do |attribute|
+      %tr
+        %td= Certificate.human_attribute_name(attribute)
+        %td= @certificate.send(attribute)
+
+%div.one
+  .links
+    - if can? :edit, Certificate
+      = link_to t(:edit), edit_volunteer_certificate_path(@volunteer)
+    - if can? :destroy, Certificate
+      = link_to t(:destroy), [@volunteer, @certificate], method: :delete, data: { confirm: 'Are you sure?' }
+    = link_to t(:back), volunteer_path(@volunteer)
+

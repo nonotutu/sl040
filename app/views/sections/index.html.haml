@@ -1,0 +1,21 @@
+%h1
+  = t(:listing)
+  %b
+    sections
+
+%div.one
+  %table.index
+    %tr
+      %th= Section.human_attribute_name(:name)
+      %th= Section.human_attribute_name(:number)
+      %th
+
+    - @sections.each do |section|
+      %tr
+        %td= section.name
+        %td= section.number
+        %td.link= link_to t(:show), section
+
+%div.one
+  .links
+    = link_to (:new_section), new_section_path

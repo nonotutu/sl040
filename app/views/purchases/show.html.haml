@@ -1,0 +1,42 @@
+#page
+
+  .bloc.ligne
+  
+    %span{id: 'titre250'}
+      %b
+        = @purchase
+
+    .bloc
+      #table_show
+        %table
+          %tr
+            %td= Purchase.human_attribute_name(:item)
+            %td= @purchase.item
+          %tr
+            %td= Purchase.human_attribute_name(:number)
+            %td= @purchase.number
+          %tr
+            %td= Purchase.human_attribute_name(:purchased_on)
+            %td= @purchase.purchased_on
+          %tr
+            %td= Purchase.human_attribute_name(:supplier)
+            %td= @purchase.supplier
+          %tr
+            %td= Purchase.human_attribute_name(:active)
+            %td= @purchase.active
+          %tr
+            %td= Purchase.human_attribute_name(:comment)
+            %td
+              - if @purchase.comment
+                - @purchase.comment.lines do |line|
+                  = line
+                  %br
+      
+    .bloc
+      #links
+        - if can? :edit, Purchase
+          = link_to t(:edit), edit_purchase_path
+        - if can? :destroy, Purchase
+          = link_to t(:destroy), @purchase, method: :delete, data: { confirm: 'Are you sure?' }
+        - if can? :index, Purchase
+          = link_to Item.model_name.human, item_path(@purchase.item)

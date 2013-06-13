@@ -1,0 +1,31 @@
+#page
+
+  .bloc.ligne
+  
+    %span{id: 'titre250'}
+
+      %b
+        = Training.model_name.human :count => 2
+
+    .bloc
+      #table_index
+        %table
+          %tr
+            %th= Training.human_attribute_name(:pos)
+            %th= Training.human_attribute_name(:short_name)
+            %th= Training.human_attribute_name(:name)
+            %th= Training.human_attribute_name(:active)
+            %th
+
+          - @trainings.each do |training|
+            %tr
+              %td= training.pos
+              %td= training.short_name
+              %td= training.name
+              %td= training.active
+              %td.link= link_to t(:show), training
+
+    .bloc
+      #links
+        - if can? :create, Training
+          = link_to t(:new_training), new_training_path

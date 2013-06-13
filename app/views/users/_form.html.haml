@@ -1,0 +1,23 @@
+= simple_form_for @user do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this supplier from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+
+  %table.form
+    - if action_name == 'new'
+      %tr
+        %td= f.label :email
+        %td= f.input :email, :collection => Volunteer.only_active, :label_method => :email, :label => false, :include_blank => false, :value_method => :email
+    %tr
+      %td= f.label :password
+      %td= f.input :password, input_html: { size: 24 }, label: false
+    %tr
+      %td= f.label :password_confirmation
+      %td= f.input :password_confirmation, input_html: { size: 24 }, label: false
+    %tr
+      %td
+      %td{:align => :right}
+        = f.submit t :save

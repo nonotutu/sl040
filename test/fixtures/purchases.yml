@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  item_id: 1
+  number: MyString
+  purchased_on: 2013-04-30
+  comment: MyText
+
+two:
+  item_id: 1
+  number: MyString
+  purchased_on: 2013-04-30
+  comment: MyText

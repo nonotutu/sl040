@@ -1,0 +1,77 @@
+#page
+
+  .bloc.ligne
+
+    %span{id: 'titre250'}
+      %b
+        = @container.root
+
+    .bloc
+      - if @container.container
+        =# TODO: changer
+        %h4
+          containers :
+          - size = 100
+          - @container.array_ancestors.each do |cont|
+            %font{:style => "font-size: #{size}%"}
+              %b
+                ⊂
+              = link_to cont, container_contents_path(cont)
+            - size = size - (size*0.20)
+
+    .bloc
+      #table_contents
+        %table
+          - @contenu.each do |cont|
+            - if cont[1].is_a?(Container)
+              %tr.container
+                - cont[0].times do
+                  %td.decal
+                - if cont[1] != @container
+                  %td.pos= cont[1].pos
+                - else
+                  %td.decal
+                %td.container.first{:colspan => @max_indent-cont[0] + 2}= cont[1].name
+                %td.container= cont[1].model
+                %td.container
+                %td.container.mono_droite= cont[1].quantity
+                - if cont[1] != @container
+                  %td.link
+                    = link_to t(:open), container_contents_path(cont[1])
+                - else
+                  %td.decal
+                %td.link
+                  = link_to t(:show), container_path(cont[1])
+                %td.link
+                  -# if can? :destroy, Container
+                    = link_to t(:destroy), cont[1], method: :delete, data: { confirm: 'Are you sure?' }
+                %td.link
+                  - if can? :create, Content
+                    = link_to "#{t(:add)} #{Item.model_name.human}", new_container_content_path(cont[1])
+                %td.link
+                  - if can? :create, Container
+                    = link_to t(:new_container), new_container_path(:container_id => cont[1].id)
+                
+
+            - elsif cont[1].is_a?(Content)
+              %tr.contenu
+                - cont[0].times do
+                  %td.decal
+                %td.pos
+                  = cont[1].pos
+                %td.contenu.first{:colspan => @max_indent - cont[0] + 2}
+                  = cont[1].item.nature
+                %td.contenu
+                  = cont[1].item.produit
+                %td.contenu
+                  = cont[1].item.condition
+                %td.contenu.mono_droite
+                  = ( cont[1].unitary ? "*" : "" ) + cont[1].quantity.to_s
+                %td
+                %td.link
+                  = link_to t(:show), container_content_path(cont[1].container, cont[1])
+                %td.link
+                  - if can? :destroy, Content
+                    = link_to t(:remove), container_content_path(cont[1].container, cont[1].id), method: :delete, data: { confirm: 'Are you sure?' }
+                %td
+                %td

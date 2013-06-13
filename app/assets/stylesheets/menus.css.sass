@@ -1,0 +1,51 @@
+
+#main_menu
+  //margin: -8px
+  padding: 0px
+  background: #cfcfcf
+  ul
+    display: inline
+    padding: 0
+    margin: 0
+    li
+      display: inline
+      padding-left: 1em
+      padding-right: 1em
+      font-size: 120%
+      letter-spacing: -.08em
+      text-shadow: 0 0 .1em black
+      color: white
+      a
+        background: none
+        text-decoration: none
+        color: white
+        &:hover
+          color: rgb(255,0,0)
+          text-shadow: 0 0 .1em white
+        &.active
+          color: rgb(255,0,0)
+          text-shadow: 0 0 .1em rgb(255,0,0)
+      &.title
+        text-shadow: -1px -1px 1px rgb(255,0,0), -1px 1px 1px rgb(255,0,0), 1px -1px 1px rgb(255,0,0), 1px 1px 1px rgb(255,0,0)
+  hr
+    margin: 0
+    border: none
+    background: darkgray
+    height: 1px
+
+#sign_menu
+  ul
+    display: inline
+    padding: 0
+    margin: 0
+    position: absolute
+    top: 0
+    right: 0
+    li
+      display: inline
+      font-size: 12px
+      letter-spacing: 0
+      padding-left: 16px
+      padding-right: 16px
+      text-shadow: none
+      color: black

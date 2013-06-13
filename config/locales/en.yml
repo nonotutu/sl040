@@ -1,0 +1,264 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+
+  equipment: equipment
+  staff: staff
+  accounting: comptabilité
+  
+  staff_menu: staff menu
+  equipment_menu: equipment menu
+  accounting_menu: accounting menu
+  
+  download_to_google_csv: download to google csv
+  download_to_pdf: download to pdf
+  mailing_list: mailing list
+  export_to_google_drive: export to google drive
+  
+  
+  create_ok: création effectuée
+  destroy_ok: suppression effectuée
+  update_ok: mise à jour effectuée
+  
+  create_not_ok: erreur lors de la création
+  destroy_not_ok: erreur lors de la suppression
+  update_not_ok: erreur lors de la mise à jour
+  
+  age: age
+  birthday: annif
+  next_birthdays: next birthdays
+  since: since
+  not_active:
+    one: not active
+    other: not active
+  included:
+    one: included
+    other: included
+  access_level: niveau d'accès
+  yesterday: yesterday
+  today: today
+  tomorrow: tomorrow
+  sort_n_filter: tirer & filtrer
+
+  metro_view: metro
+
+  show: show
+  edit: modifier
+  new: new
+  destroy: supprimer
+  add: add
+  remove: remove
+  open: open
+  back: retour
+  save: enregistrer
+  manage: administrer
+
+  home: home
+  tools: tools
+
+  listing: listing
+  showing: showing
+  editing: editing
+
+  new_activity: nouvelle activité
+  new_category: new category
+  new_certificate: nouveau brevet
+  new_container: new container
+  new_content: new content
+  new_department: new service
+  new_item: new item
+  new_purchase: nouvel achat
+  new_registration: nouvelle inscription
+  new_supplier: new supplier
+  new_training: nouvelle formation
+  new_user: nouvel utilisateur
+  new_volunteer: new volunteer
+
+  destroy_registration: retirer
+
+  google_drive: google drive
+
+  Monday: lundi
+  Tuesday: mardi
+  Wednesday: mercredi
+  Thursday: jeudi
+  Friday: vendredi
+  Saturday: samedi
+  Sunday: dimanche
+
+  Mon: lun
+  Tue: mar
+  Wed: mer
+  Thu: jeu
+  Fri: ven
+  Sat: sam
+  Sun: dim
+
+  January: janvier
+  February: février
+  March: mars
+  April: avril
+  May: mai
+  June: june
+  July: juillet
+  Augustus: août
+  September: septembre
+  October: octobre
+  November: novembre
+  December: décembre
+
+  activerecord:
+    models:
+      act_need:
+        one: besoin
+        other: besoins
+      activity:
+        one: activité
+        other: activités
+      category:
+        one: category
+        other: categories
+      certificate:
+        one: brevet
+        other: brevets
+      container:
+        one: container
+        other: containers
+      content:
+        one: content
+        other: contents
+      department:
+        one: service
+        other: services
+      item:
+        one: item
+        other: items
+      purchase:
+        one: achat
+        other: achats
+      registration:
+        one: inscription
+        other: inscriptions
+      registration_status:
+        one: status
+        other: status
+      section:
+        one: section
+        other: sections
+      supplier:
+        one: supplier
+        other: suppliers
+      training:
+        one: formation
+        other: formations
+      user:
+        one: user
+        other: users
+      volunteer:
+        one: volontaire
+        other: volontaires
+    attributes:
+      act_need:
+        pos: pos
+        name: dénomination
+        qty_volunteers: ×vols
+      activity:
+        department: service
+        department_id: service
+        name: nom
+        place: lieu
+        starts_at: début
+        ends_at: fin
+        rendezvous_at: heure rdv
+        rendezvous_place: lieu rdv
+        description: description
+      category:
+        short_name: short name
+        name: name
+      certificate:
+        number: numéro
+        issued_on: délivré le
+        volunteer: volontaire
+        training: formation
+      container:
+        pos: position
+        short_name: short name
+        name: name
+        model: model
+        status: status
+        quantity: quantity
+        container: container
+      content:
+        pos: position
+        item: item
+        container: container
+        unitary: unitary
+        quantity: quantity
+      department:
+        short_name: short name
+        name: name
+        color: couleur
+        color_id: couleur
+      item:
+        category: categorie
+        nature: nature
+        produit: produit
+        condition: condition
+        disposable: uu
+        supplier: fournisseur
+      purchase:
+        item: item
+        item_id: item
+        number: identifiant
+        purchased_on: date d'achat
+        comment: commentaire
+      registration:
+        act_need: besoin
+        act_need_id: besoin
+        volunteer: volontaire
+        volunteer_id: volontaire
+        starts_delay: début
+        ends_delay: fin
+        rendezvous_place: rdv
+        registration_status: status
+      registration_status:
+        pos: position
+        name: nom
+        short_name: abr
+      section:
+        name: nom
+        number: numéro
+      supplier:
+        name: name
+      training:
+        pos: position
+        short_name: short name
+        name: nom
+        active: active
+      user:
+        email: email
+        password: password
+      volunteer:
+        section: section
+        pos: position
+        cr_number: matricule
+        first_name: prénom
+        last_name: nom
+        sex: sexe
+        date_of_birth: né(e) le
+        place_of_birth: né(e) à
+        email: email
+        land_phone: n° fixe
+        cell_phone: n° gsm
+        cr_joined_on: entré(e) le
+        active: actif(ve)
+        department: service
+        departments: services
+        address: adresse
+        bank_account: n° compte
+
+  CRB: Croix-Rouge de Belgique
+  SLUccle: Section locale d'Uccle
+
+  

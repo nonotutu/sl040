@@ -1,0 +1,10 @@
+%h1
+  = t(:showing)
+  %b
+    = @registration
+    
+.one
+  %table.show
+    %tr
+      %td= Registration.model_name.human
+      %td= @registration

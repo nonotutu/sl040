@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nature: MyString
+  produit: MyString
+  condition: MyString
+
+two:
+  nature: MyString
+  produit: MyString
+  condition: MyString

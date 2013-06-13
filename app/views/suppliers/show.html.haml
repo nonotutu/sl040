@@ -1,0 +1,31 @@
+%h1
+  = t(:showing)
+  %b
+    = @supplier
+
+%div.one
+  %table.show
+    - ['name','address'].each do |attribute|
+      %tr
+        %td= Supplier.human_attribute_name(attribute)
+        %td= @supplier.send(attribute)
+
+%div.one
+  .links
+    - if can? :edit, Supplier
+      = link_to t(:edit), edit_supplier_path(@supplier)
+    - if can? :destroy, Supplier
+      = link_to t(:destroy), @supplier, method: :delete, data: { confirm: 'Are you sure?' }
+    = link_to t(:back), suppliers_path
+
+%h2
+  = Item.model_name.human :count => 2
+
+%div.two
+  %p
+    - @supplier.items.each do |item|
+      = link_to item, item_path(item)
+      ;
+
+  
+  

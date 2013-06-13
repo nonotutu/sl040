@@ -1,0 +1,13 @@
+#page
+  
+  .bloc.ligne
+    %span{id: 'titre250'}
+      %b
+        = @purchase
+
+    .bloc
+      = render 'form'
+
+    .bloc
+      #links
+        = link_to t(:show), @purchase

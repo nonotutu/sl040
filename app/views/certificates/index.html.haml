@@ -1,0 +1,15 @@
+%h1 
+  = t(:listing)
+  %b
+    = Certificate.model_name.human :count => 2
+  for
+  %b
+    = @volunteer
+
+%div.one
+  = render "index", :certificates => @certificates
+
+%div.one
+  .links
+    - if can? :create, Certificate
+      = link_to t(:new_certificate), new_volunteer_certificate_path(@volunteer)

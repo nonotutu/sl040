@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  volunteer_id: 1
+  training_id: 1
+  number: MyString
+  issued_on: 2013-03-15
+
+two:
+  volunteer_id: 1
+  training_id: 1
+  number: MyString
+  issued_on: 2013-03-15

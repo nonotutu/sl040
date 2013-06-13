@@ -1,0 +1,72 @@
+#page
+
+  .bloc.ligne
+
+    %span{id: 'titre250'}
+      %b
+        = Item.model_name.human :count => 2
+
+    .bloc
+      #table_filter{style: 'font-size: 80%'}
+        #filter_titre
+          = t(:sort_n_filter)
+        %form
+          %table
+            %tr
+              %td category
+              %td
+                - i = 0
+                - @categories.each do |cat|
+                  %input{ :type => 'radio', :name => 'category', :value => cat[0], :checked => ( session[:category] == cat[0].to_s ? 'checked' : nil) }= cat[1]
+                  - i += 1
+                  - if i%6 == 0
+                    %br
+            %tr
+              %td order by
+              %td
+                %select{ :name => 'order' }
+                  - @orders.each do |order|
+                    %option{ :value => order[0], :selected => ( session[:order] == order[0] ? 'selected' : nil) }= order[0]
+            %tr
+              %td search for
+              %td
+                %input{ :name => 'search', :value => session[:search] }
+            %tr
+              %td
+              %td
+                %input{ :type => 'submit', :value => 'filter' }
+                %form
+                  %input{ :type => 'submit', :value => 'reset', :name => 'reset' }
+                  
+    .bloc
+      #table_index
+        %table
+          %tr
+            %th= Item.human_attribute_name(:category)
+            %th= Item.human_attribute_name(:nature)
+            %th= Item.human_attribute_name(:produit)
+            %th= Item.human_attribute_name(:condition)
+            %th= Item.human_attribute_name(:disposable)
+            %th
+              %i count
+            %th
+              %i # #{Purchase.model_name.human count: 2}
+            %th
+
+          - @items.each do |item|
+            %tr
+              %td= item.category.short_name
+              %td= item.nature
+              %td= item.produit
+              %td= item.condition
+              %td.centre= item.disposable ? '✔' : ''
+              %td.mono_droite
+                %i= item.count
+              %td.mono_droite
+                %i= item.purchases.count if item.purchases.count > 0
+              %td.link= link_to t(:show), item
+
+    .bloc
+      #links
+        - if can? :create, Item
+          = link_to t(:new_item), new_item_path

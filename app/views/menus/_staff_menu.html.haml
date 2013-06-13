@@ -1,0 +1,18 @@
+%ul
+
+  - active = controller_name == 'staff' && action_name == 'index'  |
+    ? :active : nil                          |
+  %li.title= link_to t(:staff), staff_path, :class => active
+  
+  - active = controller_name == 'volunteers'   |
+          || controller_name == 'certificates' |
+    ? :active : nil                            |
+  %li= link_to "#{Volunteer.model_name.human :count => 2}", volunteers_metro_path, :class => active
+
+  - active = controller_name == 'trainings' |
+    ? :active : nil                         |
+  %li= link_to "#{Training.model_name.human :count => 2}", trainings_path, :class => active
+  
+  - active = action_name == 'table_volunteers_trainings'  |
+    ? :active : nil                                       |
+  %li= link_to "all certificates", table_volunteers_trainings_path, :class => active

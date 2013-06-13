@@ -1,0 +1,14 @@
+%h1
+  = t(:new)
+  %b
+    = Certificate.model_name.human
+  for
+  %b
+    = @volunteer
+    
+%div.one
+  = render 'form'
+
+%div.one
+  .links
+    = link_to t(:back), volunteer_path(@volunteer)

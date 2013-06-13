@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  activity_id: 1
+  qty_volunteers: 1
+
+two:
+  name: MyString
+  activity_id: 1
+  qty_volunteers: 1

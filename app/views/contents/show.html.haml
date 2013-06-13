@@ -1,0 +1,23 @@
+#page
+
+  .bloc.ligne
+  
+    %span{id: 'titre250'}
+      %b
+        = @content
+
+    .bloc
+      #table_show
+        %table
+          - ['container', 'pos', 'item', 'quantity', 'unitary'].each do |attribute|
+            %tr
+              %td= Content.human_attribute_name(attribute)
+              %td= @content.send(attribute)
+
+    .bloc
+      #links
+        - if can? :edit, Content
+          = link_to t(:edit), edit_container_content_path(:container => @content.container)
+        -# if can? :destroy, Content
+          = link_to t(:destroy), @content, method: :delete, data: { confirm: 'Are you sure?' }
+        = link_to t(:back), container_contents_path(@content.container)

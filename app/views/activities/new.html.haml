@@ -1,0 +1,13 @@
+#page
+
+  .bloc.ligne
+    %span{id: 'titre250'}
+      %b
+        = t(:new_activity)
+
+    .bloc
+      = render 'form'
+
+    .bloc
+      #links
+        = link_to (:back), activities_path

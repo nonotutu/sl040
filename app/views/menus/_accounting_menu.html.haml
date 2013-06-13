@@ -1,0 +1,34 @@
+%ul
+
+  - active = controller_name == 'accounting' && action_name == 'index'  |
+    ? :active : nil                                                     |
+  %li.title= link_to t(:accounting), accounting_path, :class => active
+  
+  - active = controller_name == 'accounting' && action_name == 'accdoc_from_scratch' |
+    ? :active : nil                                                                  |
+  %li= link_to "accdoc from scratch", accdoc_from_scratch_path, :class => active
+  
+  - active = controller_name == 'accounting' && action_name == 'bdc_from_scratch' |
+    ? :active : nil                                                               |
+  %li= link_to "bdc from scratch", bdc_from_scratch_path, :class => active 
+
+  / - active = controller_name == 'items'      |
+  /   ? :active : nil                          |
+  / %li= link_to "#{Item.model_name.human :count => 2}", items_path, :class => active
+  
+  / - active = controller_name == 'purchases'  |
+  /   ? :active : nil                          |
+  / %li= link_to "#{Purchase.model_name.human :count => 2}", purchases_path, :class => active
+  
+  / -# %ul.two
+  / - active = controller_name == 'categories' |
+  /   ? :active : nil                          |
+  / %li= link_to "#{Category.model_name.human :count => 2}", categories_path, :class => active
+
+  / - active = controller_name == 'suppliers'  |
+  /   ? :active : nil                          |
+  / %li= link_to "#{Supplier.model_name.human :count => 2}", suppliers_path, :class => active
+  
+  / - active = action_name == 'table_items_containers'      |
+  /   ? :active : nil                                       |
+  / %li= link_to "all contents", table_items_containers_path, :class => active

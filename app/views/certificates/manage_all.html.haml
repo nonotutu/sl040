@@ -1,0 +1,38 @@
+%h1
+  %b
+    all certificates
+  for
+  %b
+    = @volunteer
+
+
+- attributes = [Certificate.human_attribute_name(:number),    |
+                Certificate.human_attribute_name(:issued_on)] |                                
+
+%div.one
+  %table
+    %tr
+      %th= Training.model_name.human
+      - attributes.each do |attribute|
+        %th= attribute
+    - @volunteer.certificates.each do |certificate|
+      %tr
+        %td= certificate.training
+        = simple_form_for [ @volunteer, certificate ] do |f|
+          %td
+            = f.input :number, label: false, input_html: { size: 12 }
+          %td
+            = f.input :issued_on, label: false
+          %td
+            = f.submit
+
+    = simple_form_for [ @volunteer, Certificate.new ], :url => url_for(:action => 'create_from_manage_all_certificates', :controller => 'certificates'), :method => 'post' do |f|
+      %tr
+        %td
+          = f.association :training, label: false
+        %td
+          = f.input :number, label: false, input_html: { size: 12 }
+        %td
+          = f.input :issued_on, label: false
+        %td
+          = f.submit

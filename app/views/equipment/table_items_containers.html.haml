@@ -1,0 +1,9 @@
+
+%div.one
+  %table
+    - @table_all.each do |row|
+      %tr
+        - row.each do |cell|
+          %td
+            = cell
+

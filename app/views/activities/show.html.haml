@@ -1,0 +1,94 @@
+#page
+  
+  .bloc.ligne
+  
+    %span{id: 'titre250'}
+      %b
+        = @activity
+
+    %table.mep2c
+      %tr.mep2c
+        %td.mep2c{style: 'padding-top: 16px'}
+          .bloc
+            #table_show
+              %table
+                %tr
+                  %td= Activity.human_attribute_name(:department)
+                  %td= @activity.department
+                %tr
+                  %td= Activity.human_attribute_name(:name)
+                  %td= @activity.name
+                %tr
+                  %td= Activity.human_attribute_name(:place)
+                  %td= @activity.place
+                %tr
+                  %td= Activity.human_attribute_name(:address)
+                  %td
+                    - if @activity.address
+                      - @activity.address.lines.each do |r|
+                        = r
+                        %br
+                %tr
+                  %td= Activity.human_attribute_name(:rendezvous_place)
+                  %td= @activity.rendezvous_place
+                %tr
+                  %td= Activity.human_attribute_name(:rendezvous_at)
+                  %td
+                    - if @activity.rendezvous_at
+                      = @activity.rendezvous_at.to_formatted_s(:cust_short)
+                %tr
+                  %td= Activity.human_attribute_name(:starts_at)
+                  %td= @activity.starts_at.to_formatted_s(:cust_short)
+                %tr
+                  %td= Activity.human_attribute_name(:ends_at)
+                  %td= @activity.ends_at.to_formatted_s(:cust_short)
+                %tr
+                  %td= Activity.human_attribute_name(:description)
+                  %td{style: 'white-space: normal'}
+                    - @activity.description.lines.each do |line|
+                      = line
+                      %br
+
+          .bloc
+            #links
+              - if can? :edit, Activity
+                = link_to t(:edit), edit_activity_path(@activity)
+              - if can? :destroy, Activity
+                = link_to t(:destroy), @activity, method: :delete, data: { confirm: 'Are you sure?' }
+              = link_to t(:back), activities_path
+              = link_to t(:metro_view), activity_metro_path(@activity)
+
+        %td.mep2c{style: 'padding-top: 16px'}
+
+          - if can? :edit, Activity
+            .bloc.ligne
+              %span{id: 'titre200'}
+                %b
+                  = ActNeed.model_name.human :count => 2
+                  &
+                  = Registration.model_name.human :count => 2
+
+              .bloc{style: 'font-size: 80%'}
+                .minissbloc
+                  - @act_needs = @activity.act_needs
+                  = render 'act_needs/index'
+                  
+                .minissbloc
+                  - if params[:act_need]
+                    - @act_need = ActNeed.find(params[:act_need])
+                  - else
+                    - @act_need = ActNeed.new(:activity_id => @activity.id)
+                  = render 'act_needs/form'
+                
+              .bloc{style: 'font-size: 80%'}
+                .minissbloc
+                  - @registrations = @activity.registrations
+                  = render 'registrations/index'
+              
+                .minissbloc
+                  - if params[:registration]
+                    - @registration = Registration.find(params[:registration])
+                  - else
+                    - @registration = Registration.new(:activity_id => @activity.id)
+                  = render 'registrations/form'
+

@@ -1,0 +1,31 @@
+= simple_form_for @purchase do |f| 
+  - if @purchase.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@purchase.errors.count, "error")} prohibited this item from being saved:"
+      %ul
+        - @purchase.errors.full_messages.each do |msg|
+          %li= msg
+
+  = f.hidden_field :item_id
+  
+  #table_form
+    %table
+      %tr
+        %td= f.label :number
+        %td= f.input :number, input_html: { size: 32 }, label: false
+      %tr
+        %td= f.label :purchased_on
+        %td= f.input :purchased_on, label: false
+      %tr
+        %td= f.label :supplier
+        %td= f.association :supplier
+      %tr
+        %td= f.label :comment
+        %td= f.input :comment, input_html: { rows: 6, cols: 40 }, label: false
+      %tr
+        %td= f.label :active
+        %td= f.input :active, label: false
+      %tr
+        %td
+        %td
+          = f.submit t :save

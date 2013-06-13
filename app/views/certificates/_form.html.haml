@@ -1,0 +1,27 @@
+= simple_form_for [@volunteer, @certificate] do |f|
+  - if @certificate.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@certificate.errors.count, "error")} prohibited this training from being saved:"
+      %ul
+        - @certificate.errors.full_messages.each do |msg|
+          %li= msg
+
+  = f.hidden_field :volunteer_id
+  %table.form
+    %tr
+      %td= f.label :volunteer
+      %td= @volunteer
+      =# f.association :volunteer, :label => false
+    %tr
+      %td= f.label :training
+      %td= f.association :training, :label => false
+    %tr
+      %td= f.label :number
+      %td= f.input :number, input_html: { size: 24 }, :label => false
+    %tr
+      %td= f.label :issued_on
+      %td= f.input :issued_on, :start_year => DateTime.now.year - 70, :end_year => DateTime.now.year, :include_blank => true, label: false
+    %tr
+      %td
+      %td{ :align => :right }
+        = f.submit t(:save)

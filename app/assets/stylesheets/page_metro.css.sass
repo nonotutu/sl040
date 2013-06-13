@@ -1,0 +1,261 @@
+
+#page_metro
+  font-size: 16px
+  
+  #legende
+    table
+      font-size: 80%
+      border-spacing: 4px
+      width: 80%
+      margin-left: auto
+      margin-right: auto
+      tr
+        height: 2em
+        line-height: 1em
+    margin-bottom: 24px
+    
+  #filter
+    background: linear-gradient(to right, white, white, lightgreen, white, white)
+    table
+      margin-left: auto
+      margin-right: auto
+      tr
+        td:nth-child(2n+1)
+          font-size: 120%
+          text-align: right
+        td:nth-child(2n)
+          padding-left: 1em
+          padding-right: 2em
+          input, select
+            font-size: 120%
+            text-align: left
+        &:last-child
+          td:last-child
+            text-align: right
+    margin-bottom: 24px
+    
+
+  #clear_left
+    clear: left
+
+  #new_ligne
+    width: 1188px
+    margin: auto
+    font-size: 90%
+    clear: left
+    &.vol
+      width: 1192px
+
+
+  #case
+    float: left
+    margin-left: 24px
+    &:first-child
+      margin-left: 0
+    margin-bottom: 24px
+    box-shadow: -2px 2px 2px black
+    overflow: auto
+    vertical-align: top
+          
+    &.activity
+      width: 380px
+      height: 300px
+    
+      #date_service
+        font-weight: bold
+        font-size: 150%
+        padding: 12px
+        padding-top: 8px
+        padding-bottom: 8px
+        #date
+          float: left
+          width: 70%
+          text-align: left
+          padding-right: 0
+        #service
+          float: left
+          width: 30%
+          text-align: right
+          padding-left: 0
+          
+      #titre
+        padding-bottom: 8px
+        font-weight: bold
+        text-align: center
+        font-size: 150%
+        text-shadow: 0 .1em 1px white, -.1em .1em 1px white, .1em .1em 1px white, 0 -.1em 1px white, -.1em -.1em 1px white, .1em -.1em 1px white, -.1em 0 1px white, .1em 0 1px white
+        a
+          text-decoration: none
+          color: black
+          &:hover
+            color: white
+            text-shadow: 0 .1em 1px black, -.1em .1em 1px black, .1em .1em 1px black, 0 -.1em 1px black, -.1em -.1em 1px black, .1em -.1em 1px black, -.1em 0 1px black, .1em 0 1px black
+            
+      #infos
+        padding-bottom: 4px
+        dl
+          dt
+            float: left
+            height: 1.2em
+            text-align: right
+            width: 80px
+            font-size: 80%
+            padding-top: 3px
+          dd
+            height: 1.2em
+            padding-left: 96px
+            vertical-align: top
+            
+      #separation
+        font-size: 80%
+        text-align: center
+        background: rgba(255,255,255,.2)
+        font-weight: bold
+        margin-left: 8px
+        margin-right: 8px
+        margin-bottom: 4px
+        
+      #beis
+        padding-bottom: 4px
+        font-size: 80%
+        padding-left: 16px
+        ul
+          padding-left: 16px
+          li
+            &.vol
+              list-style-type: disc
+              font-size: 110%
+              font-weight: normal
+            &.an
+              font-weight: bold
+              font-size: 100%
+              list-style-type: square
+              ul
+                padding-left: 32px
+                
+      #description
+        padding-bottom: 4px
+        font-size: 80%
+        padding-left: 8px
+        padding-right: 8px
+      
+    &.volunteer
+      width: 280px
+      height: 240px
+
+      #prenom
+        padding: 12px
+        padding-top: 8px
+        padding-bottom: 0
+        font-size: 200%
+        
+      #nom
+        padding: 12px
+        padding-top: 0
+        padding-bottom: 24px
+        font-size: 150%
+        
+      #telephone
+        padding: 12px
+        padding-top: 0
+        padding-bottom: 8px
+        font-size: 150%
+        text-align: right
+          
+      #email
+        padding: 12px
+        padding-top: 0
+        padding-bottom: 24px
+        font-size: 120%
+        text-align: right
+        
+      #annif
+        text-align: center
+        font-size: 200%
+  
+          
+  #case_lien
+    @extend #case
+    background: black
+    //padding-bottom: 16px
+    text-align: center
+    font-size: 200%
+    a
+      color: white
+      &:visited
+        color: white
+      &:hover
+        color: red
+
+  #case_mois_annee
+    @extend #case
+    text-shadow: 0 0 16px black, 0 0 16px black, 0 0 16px black, 0 0 16px black, 4px 4px 16px black, 4px 4px 16px black, 4px 4px 16px black, 4px 4px 16px black, 4px -4px 16px black, 4px -4px 16px black, 4px -4px 16px black, 4px -4px 16px black, -4px 4px 16px black, -4px 4px 16px black, -4px 4px 16px black, -4px 4px 16px black, -4px -4px 16px black, -4px -4px 16px black, -4px -4px 16px black, -4px -4px 16px black
+    color: white
+    background: white
+    #mois
+      margin-top: 80px
+      vertical-align: bottom
+      font-weight: bold
+      text-align: center
+      width: 100%
+      font-size: 400%
+      line-height: 1em
+    #annee
+      font-weight: bold
+      text-align: center
+      width: 100%
+      font-size: 300%
+      line-height: 1em
+      
+
+
+  #info
+    min-height: 48px
+    dl
+      dt
+        img
+          float: left
+          width: 48px
+      dd
+        padding-left: 80px
+        vertical-align: top
+        #date
+          font-size: 150%
+        #lieu
+          font-size: 150%
+        #adresse
+          padding-top: 8px
+          font-size: 120%
+          line-height: 1em
+        #liste_beis
+          ul
+            padding: 0
+            li
+              &.vol
+                list-style-type: disc
+                font-size: 120%
+                font-weight: normal
+              &.an
+                font-weight: bold
+                font-size: 100%
+                list-style-type: square
+                ul
+                  padding-left: 32px
+        #horaires
+          table
+            border-collapse: collapse
+            padding: 0
+            margin: 0
+            tr:nth-child(1)
+              td
+                padding: 0
+                font-size: 80%
+                color: black
+                text-decoration: underline
+                padding-right: 32px
+            tr:nth-child(2)
+              td
+                font-size: 120%
+                padding: 0
+                padding-right: 32px
+

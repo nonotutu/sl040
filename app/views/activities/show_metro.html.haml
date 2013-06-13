@@ -1,0 +1,133 @@
+- col = "##{@activity.department.color.hex}"
+- coll = "rgba(#{(col[1..2]).hex},#{(col[3..4]).hex},#{(col[5..6]).hex},.5)"
+
+#page_metro
+  
+  .bloc{align: 'center'}
+  
+    %table.mep2c{style: 'margin-top: 12px; box-shadow: -4px 4px 4px gray; max-width: 80%'}
+      %tr.mep2c{style: "background: radial-gradient(ellipse at top right, white, #{col}, #{col}, #{col})"}
+        %td.mep2c{colspan: 2, style: 'text-align: center'}
+          .bloc
+            #texte.t5{style: 'color: white;'}
+              %b
+                = @activity.department.short_name
+                ─
+                = @activity
+      
+      -#%tr.mep2c{style: "background: #{coll}"}
+      %tr.mep2c{style: "background: linear-gradient(to bottom, white, #{coll} 16px)"}
+        %td.mep2c
+        
+          .bloc
+            #info
+              %dl
+                %dt
+                  %img{ src: "/icons/calendar.png"}
+                %dd
+                  #date
+                    = t @activity.real_start.strftime("%A")
+                    = @activity.date_to_s
+
+          .bloc
+            #info
+              %dl
+                %dt
+                  %img{ src: "/icons/horaires.png"}
+                %dd
+                  #horaires
+                    %table
+                      %tr
+                        %td rendez-vous
+                      %tr
+                        %td= @activity.rendezvous
+                    %table
+                      %tr
+                        %td sur place
+                        %td opérationnel
+                        %td fin
+                      %tr
+                        %td
+                        %td= @activity.starts_at_to_short_s
+                        %td= @activity.ends_at_to_short_s
+          .bloc
+            #info
+              %dl
+                %dt
+                  %img{ src: "/icons/adresses.png"}
+                %dd
+                  #lieu
+                    = @activity.place
+                  #adresse
+                    - if @activity.address
+                      - @activity.address.lines.each do |r|
+                        = r
+                        %br
+                      
+          - unless @activity.description.empty?
+            .bloc
+              #info
+                %dl
+                  %dt
+                    %img{ src: "/icons/description.png"}
+                  %dd
+                    - @activity.description.lines.each do |line|
+                      = line
+                      %br
+                      
+        %td.mep2c
+          .bloc
+            #info
+              %dl
+                %dt
+                  %img{ src: "/icons/beis.png"}
+                %dd
+                  #liste_beis
+                    %ul
+                      - @activity.registrations.where(act_need_id: nil).each do |registration|
+                        %li.vol
+                          - if registration.registration_status
+                            = registration.registration_status.short_name
+                            ─
+                          = registration.to_short_s
+                          -# if can? :confirmer_presence, registration
+                            = link_to "confirmer présence", confirmer_presence_path(registration.id)
+                          
+                      - @activity.act_needs.each do |act_need|
+                        %li.an
+                          = act_need
+                          %ul
+                            - (c = @activity.registrations.where(act_need_id: act_need.id)).each do |registration|
+                              %li.vol
+                                - if registration.registration_status
+                                  = registration.registration_status.short_name
+                                  ─
+                                = registration.to_short_s
+                                -# if can? :confirmer_presence, registration
+                                  = link_to "confirmer présence", confirmer_presence_path(registration.id)
+                                
+                            - if act_need.qty_volunteers
+                              - (c.count...act_need.qty_volunteers).each do
+                                %li.vol
+          .bloc
+            #texte{style: 'font-size: 80%; color: white; text-shadow: 0 0 8px black'}
+              .ssbloc
+                Inscription ou changement
+                via mail: secours@croix-rouge-uccle.be
+              .ssbloc
+                #h1
+                  Légende :
+              .ssbloc
+                %ul
+                  %li
+                    ⍰ : à confirmer
+                  %li
+                    ⌛ : en attente de confirmation
+                  %li
+                    v : confirmé
+                      
+    .bloc
+      #links
+        - if can? :edit, Activity
+          = link_to t(:manage), activity_path(@activity)
+        = link_to t(:back), activities_metro_path

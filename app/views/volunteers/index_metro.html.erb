@@ -1,0 +1,64 @@
+<div id = "page_metro">
+
+  <div style="margin-bottom: 24px"></div>
+  
+  <div id="filter">
+    <%= render "filter"%>
+  </div>
+
+  <% table = [] %>
+  <% @volunteers.each do |a| %>
+    <% table << a %>
+  <% end %>
+
+  <div id='new_ligne' class='vol'>
+    <% i = 0 %>
+    <% compteur_case = 0 %>
+    <% (0..table.count-1).each do %>
+      <% volunteer = table[i] %>
+      <% if compteur_case%4 == 0 && compteur_case != 0 %> <!-- passage à la ligne si nécessaire -->
+        </div>
+        <div id = 'new_ligne' class='vol'>
+      <% end %>
+      <% bgcouleur = "background: radial-gradient(ellipse at top right, white, pink, pink)" if volunteer.sex == 1 %>
+      <% bgcouleur = "background: radial-gradient(ellipse at top right, white, lightblue, lightblue)" if volunteer.sex == 2 %>
+      
+      <div id='case' class="volunteer" style="<%=bgcouleur%>">
+        <%= link_to(volunteer_metro_path(volunteer), style: 'color: inherit') do %>
+          <div id='prenom'>
+            <%= volunteer.first_name %>
+          </div>
+          <div id='nom'>
+            <%= volunteer.last_name %>
+          </div>
+          <div id='telephone'>
+            <%= volunteer.cell_phone %>
+          </div>
+          <div id='email'>
+            <%- email = volunteer.email.split('@') %>
+            <%= email[0] %>
+            <br/>
+            <%= "@#{email[1]}" %>
+          </div>
+          <div id='annif'>
+            <%= volunteer.birthday %>
+          </div>
+        <% end %>
+      </div>
+
+      <% i += 1 %>
+      <% compteur_case += 1 %>
+    <% end %>
+    <% if compteur_case%4 == 0 %>
+      </div>
+      <div id='new_ligne' class='vol'>
+    <% end %>
+      
+    <% if can? :create, Volunteer %>
+      <!-- lien -->
+      <div id = 'case_lien' class='volunteer'>
+        <br/>
+        <%= link_to t(:manage), volunteers_path %>
+      </div>
+    <% end %>
+  </div>

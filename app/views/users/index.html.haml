@@ -1,0 +1,22 @@
+%h1
+  = t(:listing)
+  %b
+    = User.model_name.human :count => 2
+
+%div.one
+  %table.index
+    %tr
+      %th= User.human_attribute_name(:email)
+      %th= t(:access_level)
+      %th
+
+    - @users.each do |user|
+      %tr
+        %td= user.email
+        %td= user.access_level
+        %td.link= link_to t(:show), user
+
+%div.one
+  .links
+    - if can? :create, User
+      = link_to t(:new_user), new_user_path

@@ -1,0 +1,80 @@
+#page
+
+  .bloc.ligne
+  
+    %span{id: 'titre250'}
+      %b
+        = @volunteer
+
+    %table.mep2c
+      %tr.mep2c
+        %td.mep2c{style: 'padding-top: 16px'}
+          .bloc
+            #table_show
+              %table
+                - [:section, :pos, :cr_number, :first_name, :last_name].each do |attribute|
+                  %tr
+                    %td= Volunteer.human_attribute_name(attribute)
+                    %td= @volunteer.send(attribute)
+                %tr
+                  %td= Volunteer.human_attribute_name(:sex)
+                  %td= @volunteer.sex_to_string
+                - [:date_of_birth, :place_of_birth].each do |attribute|
+                  %tr
+                    %td= Volunteer.human_attribute_name(attribute)
+                    %td= @volunteer.send(attribute)
+                %tr
+                  %td= Volunteer.human_attribute_name(:address)
+                  %td
+                    - if @volunteer.address
+                      - @volunteer.address.lines do |line|
+                        = line
+                        %br
+                - [:email, :land_phone, :cell_phone, :bank_account, :cr_joined_on].each do |attribute|
+                  %tr
+                    %td= Volunteer.human_attribute_name(attribute)
+                    %td= @volunteer.send(attribute)
+                %tr
+                  %td= Department.model_name.human :count => 2
+                  %td
+                    - @volunteer.departments.each do |d|
+                      = d.short_name
+                      ;
+            
+          .bloc
+            #links
+              - if can? :edit, Volunteer
+                = link_to t(:edit), edit_volunteer_path
+              - if can? :destroy, Volunteer
+                = link_to t(:destroy), @volunteer, method: :delete, data: { confirm: 'Are you sure?' }
+              - if can? :index, Volunteer
+                = link_to t(:list), volunteers_path
+              = link_to t(:metro_view), volunteer_metro_path(@volunteer)
+
+        %td.mep2c{style: 'padding-top: 16px'}
+        
+          .bloc.ligne
+          
+            %span{id: 'titre200'}
+              %b
+                = (Certificate.model_name.human :count => 2)
+          
+            .bloc
+              #table_index
+                = render "certificates/index", :certificates => @certificates
+
+            .bloc
+              #links
+                - if can? :create, Certificate
+                  = link_to t(:new_certificate), new_volunteer_certificate_path(@volunteer)
+                -# if can? :manage, Certificate
+                  = link_to t(:manage), manage_all_certificates_path(@volunteer)
+                  
+          .bloc
+            - if can? :edit, @volunteer
+              #texte{style: 'color: gray'}
+                Toute modification effectuée doit être signalée à :
+            - else
+              - if current_user.email == @volunteer.email
+                #texte{style: 'color: gray'}
+                  Pour effectuer une modification, contacter :

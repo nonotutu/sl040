@@ -1,0 +1,19 @@
+%h1
+  = t(:showing)
+  %b
+    = @section
+
+%div.one
+  %table.show
+    %tr
+      %td= Section.human_attribute_name(:name)
+      %td= @section.name
+    %tr
+      %td= Section.human_attribute_name(:number)
+      %td= @section.number
+
+%div.one
+  .links
+    = link_to t(:edit), edit_section_path(@section)
+    = link_to t(:destroy), @section, method: :delete, data: { confirm: 'Are you sure?' }
+    = link_to t(:back), sections_path

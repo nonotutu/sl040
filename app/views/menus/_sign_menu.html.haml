@@ -1,0 +1,12 @@
+- if current_user
+  %ul
+    %li
+      = current_user.email
+      \:
+      = current_user.access_level
+      \|
+      = link_to 'sign out', destroy_user_session_path, :method => :delete
+- else
+  %ul
+    %li
+      = link_to 'sign in', new_user_session_path

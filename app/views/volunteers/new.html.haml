@@ -1,0 +1,13 @@
+#page
+  
+  .bloc.ligne
+    %span{id: 'titre250'}
+      %b
+        = t(:new_volunteer)
+
+    .bloc
+      = render 'form'
+
+    .bloc
+      #links
+        = link_to t(:back), volunteers_path

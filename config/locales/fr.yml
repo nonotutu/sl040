@@ -1,0 +1,118 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+fr:
+
+  equipment: matériel
+  staff: personnel
+  
+  age: age
+
+  show: afficher
+  edit: modifier
+  new: nouveau
+  destroy: supprimer
+  add: ajouter
+  remove: retirer
+  open: ouvrir
+  back: retour
+  save: enregistrer
+  
+  home: home
+  tools: outils
+  listing: liste
+  
+  showing: affichage
+  editing: édition
+  
+  new_category: nouvelle catégorie
+  new_certificate: nouveau brevet
+  new_container: nouveau contenant
+  new_content: nouveau contenu
+  new_item: nouvel article
+  new_supplier: nouveau fournisseur
+  new_training: nouvelle formation
+  new_volunteer: nouveau volontaire
+
+  google_drive: google drive
+  
+  activerecord:
+    models:
+      category:
+        one: catégorie
+        other: catégories
+      certificate:
+        one: brevet
+        other: brevets
+      container:
+        one: contenant
+        other: contenants
+      content:
+        one: contenu
+        other: contenus
+      item:
+        one: article
+        other: articles
+      supplier:
+        one: fournisseur
+        other: fournisseurs
+      training:
+        one: formation
+        other: formations
+      volunteer:
+        one: volontaire
+        other: volontaires
+    attributes:
+      category:
+        short_name: nom court
+        name: nom
+      certificate:
+        name: nom
+        number: numéro
+        issued_on: délivré le
+        volunteer: volontaire
+        training: formation
+      container:
+        pos: pos
+        short_name: nom court
+        name: nom
+        model: modèle
+        status: statut
+        quantity: quantité
+        container: contenant
+      content:
+        pos: pos
+        item: article
+        container: contenant
+        unitary: unitaire
+        quantity: quantité
+      item:
+        category: catégorie
+        nature: nature
+        produit: produit
+        condition: conditionnement
+        disposable: usage unique
+        supplier: fournisseur
+      supplier:
+        name: nom
+      training:
+        pos: pos
+        name: nom
+        active: actif
+      volunteer:
+        pos: pos
+        cr_number: matricule
+        first_name: prénom
+        last_name: nom
+        sex: sexe
+        date_of_birth: né(e) le
+        place_of_birth: né(e) à
+        email: e-mail
+        land_phone: tel fixe
+        cell_phone: tel mobile
+        cr_joined_on: date CRB
+
+  CRB: Croix-Rouge de Belgique
+  SLUccle: Section locale d'Uccle
+
+  

@@ -1,0 +1,61 @@
+#page
+  
+  .bloc.ligne
+  
+    %span{id: 'titre250'}
+      %b
+        = @container
+
+    .bloc
+      #table_show
+        %table
+          - ['pos', 'short_name', 'name', 'model', 'status', 'quantity', 'container'].each do |attribute|
+            %tr
+              %td= Container.human_attribute_name(attribute)
+              %td= @container.send(attribute)
+
+    .bloc
+      #links
+        - if @container.root?
+          = link_to '⬇ inventory', container_path(@container, :pdf)
+        - if can? :edit, Container
+          = link_to t(:edit), edit_container_path
+        - if can? :destroy, Container
+          = link_to t(:destroy), @container, method: :delete, data: { confirm: 'Are you sure?' }
+        - if @container.root?
+          = link_to t(:back), containers_path
+        - else
+          = link_to t(:back), container_contents_path(@container)
+
+    .bloc.ligne
+      %span{id: 'titre175'}
+        %b
+          ancestors
+  
+      .bloc
+        - array_ancestors = @container.array_ancestors
+        - if array_ancestors.count > 0
+          #texte
+            - array_ancestors.each do |cont|
+              %b
+                ⊂
+              = link_to cont, container_contents_path(cont.id)
+
+      %span{id: 'titre175'}
+        %b
+          contents
+          
+      .bloc
+        #texte
+          containers :
+          %b
+            = @container.count_containers
+        #texte
+          contents :
+          %b
+            = @container.count_contents
+
+      .bloc
+        #links
+          = link_to t(:open), container_contents_path(@container)
+          

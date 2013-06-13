@@ -1,0 +1,10 @@
+%h1
+  = t(:editing)
+  %b= @item
+
+%div.one
+  = render 'form'
+
+%div.one
+  .links
+    = link_to t(:back), @item

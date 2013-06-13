@@ -1,0 +1,55 @@
+#page
+
+  = render "home/header_crb"
+
+  
+  -# %span{id: 'titre250'}
+    = t(:staff_menu).capitalize
+
+  -# .bloc
+    .main_menu_index
+      = render 'menus/staff_menu'
+    
+  .bloc.ligne
+    %span{id: 'titre200'}
+      exportation
+  
+    -#.bloc
+      #texte
+        #texte_titre
+          export 
+          %b
+            all active volunteers
+
+    .bloc
+      #texte
+        last update:
+        %b
+          = @last_update
+
+    .bloc
+      #links
+        - if can? :staff, :export
+          = link_to t(:download_to_google_csv), volunteers_path(:format => :csv, :default => 'default')
+          = link_to t(:export_to_google_drive), volunteers_to_google_drive_path
+
+  .bloc.ligne
+    %span{id: 'titre200'}
+      = t(:next_birthdays)
+
+    .bloc
+      #texte
+        %ul
+          - @next_birthdays.each do |next_birthday|
+            %li{class: next_birthday[:active] ? :t3 : nil}
+              - if (next_birthday[:date]+1.day).today?
+                .c1{style: 'display: inline'}= t(:yesterday) + " -"
+                = next_birthday[:name]
+              - elsif next_birthday[:date].today?
+                .c1
+                  %b= t(:today) + "! - " + next_birthday[:name]
+              - elsif (next_birthday[:date]-1.day).today?
+                .c1{style: 'display: inline'}= t(:tomorrow) + " -"
+                = next_birthday[:name]
+              - else
+                = "#{next_birthday[:date].day}/#{next_birthday[:date].month} - #{next_birthday[:name]}"

@@ -1,0 +1,43 @@
+%ul
+  - active = action_name == 'index' && controller_name == 'home' |
+    ? :active : nil                                              |
+  %li= link_to t(:home), root_path, :class => active
+  
+  - active = controller_name == 'activities' |
+    ? :active : nil                          |
+  %li= link_to (Activity.model_name.human :count => 2), activities_metro_path, :class => active
+
+  - active = controller_name == 'staff'        |
+          || controller_name == 'volunteers'   |
+          || controller_name == 'trainings'    |
+          || controller_name == 'certificates' |
+    ? :active : nil                            |
+  %li= link_to t(:staff), staff_path, :class => active
+  
+  - active = controller_name == 'equipment'  |
+          || controller_name == 'containers' |
+          || controller_name == 'items'      |
+          || controller_name == 'categories' |
+          || controller_name == 'suppliers'  |
+    ? :active : nil                            |
+  %li= link_to t(:equipment), equipment_path, :class => active
+  
+  - active = controller_name == 'accounting' |
+    ? :active : nil                          |
+  %li= link_to t(:accounting), accounting_path, :class => active
+
+  - active = action_name == 'google_drive' |
+    ? :active : nil                        |
+  %li= link_to t(:google_drive), google_drive_path, :class => active
+  
+  - active = controller_name == 'departments' |
+    ? :active : nil                           |
+  %li= link_to (Department.model_name.human :count => 2), departments_path, :class => active
+  
+  - active = controller_name == 'sections' |
+    ? :active : nil                        |
+  %li= link_to (Section.model_name.human :count => 2), sections_path, :class => active
+  
+  - active = controller_name == 'users' |
+    ? :active : nil                           |
+  %li= link_to (User.model_name.human :count => 2), users_path, :class => active

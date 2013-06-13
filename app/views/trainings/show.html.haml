@@ -1,0 +1,23 @@
+#page
+
+  .bloc.ligne
+  
+    %span{id: 'titre250'}
+      %b
+        = @training
+
+    .bloc
+      #table_show
+        %table
+          - [:pos, :short_name, :name, :active].each do |attribute|
+            %tr
+              %td= Training.human_attribute_name(attribute)
+              %td= @training.send(attribute)
+
+    .bloc
+      #links
+        - if can? :edit, Training
+          = link_to t(:edit), edit_training_path
+        - if can? :destroy, Training
+          = link_to t(:destroy), @training, method: :delete, data: { confirm: 'Are you sure?' }
+        = link_to t(:back), trainings_path

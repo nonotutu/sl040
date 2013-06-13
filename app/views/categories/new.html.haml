@@ -1,0 +1,11 @@
+%h1
+  = t(:new)
+  %b
+    = Category.model_name.human
+
+%div.one
+  = render 'form'
+
+%div.one
+  .links
+    = link_to t(:back), categories_path

@@ -1,0 +1,30 @@
+
+= simple_form_for [@container, @content] do |f|
+  - if @content.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@content.errors.count, "error")} prohibited this content from being saved:"
+      %ul
+        - @content.errors.full_messages.each do |msg|
+          %li= msg
+
+  %table.form
+    %tr
+      %td= f.label :pos
+      %td= f.input :pos
+    %tr
+      %td= f.label :item
+      %td= f.association :item, :input_html => { :size => 8 }, :label => false, :include_blank => false
+    %tr
+      %td= f.label :container
+      %td= f.association :container, :collection => @containers, :label => false, :include_blank => false
+    %tr
+      %td= f.label :quantity
+      %td= f.input :quantity
+    %tr
+      %td= f.label :unitary
+      %td= f.input :unitary
+    %tr
+      %td
+      %td{:align => :right}
+        = f.submit t :save
+

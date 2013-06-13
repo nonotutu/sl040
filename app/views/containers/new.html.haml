@@ -1,0 +1,14 @@
+#page
+  
+  .bloc.ligne
+  
+    %span{id: 'titre250'}
+      %b
+        = t(:new_container)
+
+    .bloc
+      = render 'form'
+
+    .bloc
+      #links
+        = link_to t(:back), containers_path

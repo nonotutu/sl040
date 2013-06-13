@@ -1,0 +1,14 @@
+#page
+
+  .bloc.ligne
+
+    %span{id: 'titre250'}
+      %b
+        = @training
+
+    .bloc
+      = render 'form'
+
+    .bloc
+      #links
+        = link_to t(:back), training_path(@training)

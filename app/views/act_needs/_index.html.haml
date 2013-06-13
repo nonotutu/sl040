@@ -1,0 +1,22 @@
+#table_index
+  %table
+    %tr
+      %th= ActNeed.human_attribute_name(:pos)
+      %th= ActNeed.human_attribute_name(:name)
+      %th= ActNeed.human_attribute_name(:qty_volunteers)
+      %th
+      %th
+
+    - @act_needs.each do |act_need|
+
+      - active = ( params[:act_need].to_i == act_need.id ? :selected : nil )
+
+      %tr{ class: active }
+        %td= act_need.pos
+        %td= act_need.name
+        %td.mono_droite= act_need.qty_volunteers
+        - unless active
+          %td.link= link_to t(:edit), activity_path(@activity.id, act_need: act_need.id)
+        - else
+          %td.link= link_to t(:cancel)
+        %td.link= link_to t(:destroy), [@activity, act_need], method: :delete, data: { confirm: 'Are you sure?' }

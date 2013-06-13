@@ -1,0 +1,36 @@
+= simple_form_for [@activity, @registration] do |f|
+  - if errors = params[:registration_errors]
+    #error_explanation
+      %h2= "#{pluralize(errors.count, "error")} prohibited this registration from being saved:"
+      %ul
+        - errors.each do |msg|
+          %li= msg
+          
+  = f.hidden_field :activity_id
+  
+  #table_form.compact
+    %table
+      %tr
+        %td= f.label :act_need_id
+        %td= f.collection_select :act_need_id, @activity.act_needs, :id, :name, include_blank: true
+      %tr
+        %td= f.label :volunteer_id
+        %td= f.association :volunteer, collection: Volunteer.order(:section_id).order(:first_name).only_active, label: false
+      %tr
+        %td
+          = f.label :starts_delay
+          \─
+          = f.label :ends_delay
+        %td
+          = f.select :starts_delay, @starts_delays, selected: @registration.starts_delay ||= @starts_delays.first
+          \─
+          = f.select :ends_delay, @ends_delays, selected: @registration.ends_delay ||= @ends_delays.last
+      %tr
+        %td= f.label :rendezvous_place
+        %td= f.input :rendezvous_place, input_html: { size: 16 }, label: false
+      %tr
+        %td= f.label :registration_status
+        %td= f.association :registration_status, label: false
+      %tr
+        %td
+        %td{align: :right}= f.submit t(:save)

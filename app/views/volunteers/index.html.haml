@@ -1,0 +1,80 @@
+#page
+
+  .bloc.ligne
+
+    %span{id: 'titre250'}
+      %b
+        = Volunteer.model_name.human :count => 2
+      %span{style: 'font-size: 50%'}
+        \/
+        = @volunteers.count
+    
+    .bloc
+      #table_filter{style: 'font-size: 80%'}
+        #filter_titre
+          = t(:sort_n_filter)
+        = render "filter"
+    
+    .bloc
+      #table_index{style: 'font-size: 80%'}
+        %table
+          %tr
+            %th= Volunteer.human_attribute_name(:pos)
+            %th= Volunteer.human_attribute_name(:first_name)
+            %th= Volunteer.human_attribute_name(:last_name)
+            %th= t(:birthday)
+            %th= Volunteer.human_attribute_name(:email)
+            %th= Volunteer.human_attribute_name(:cell_phone)
+            %th= t(:since)
+            %th= Department.model_name.human :count => 2
+            %th
+              %i= Training.model_name.human :count => 2
+            %th
+            
+          - @volunteers.each do |volunteer|
+            %tr
+              %td.mono_droite= volunteer.pos
+              %td= volunteer.first_name
+              %td= volunteer.last_name
+              %td
+                - if volunteer.birthday
+                  = volunteer.birthday
+              %td= volunteer.email
+              %td= volunteer.cell_phone
+              %td
+                - if volunteer.cr_joined_on
+                  = (Date.today - volunteer.cr_joined_on).to_i
+              %td
+                - volunteer.departments.each do |d|
+                  = d.short_name
+                  ;
+              %td{style: 'white-space: normal'}
+                %i
+                  - volunteer.certificates.each do |certificate|
+                    = link_to certificate.training.short_name, volunteer_certificate_path(volunteer.id, certificate.id)
+                    ;
+              %td.link= link_to t(:show), volunteer
+    
+    .bloc
+      #links
+        - if can? :create, Volunteer
+          = link_to t(:new_volunteer), new_volunteer_path, style: 'float: left'
+        - if can? :staff, :export
+          = link_to t(:download_to_google_csv), volunteers_path(:format => :csv), style: 'float: left'
+          = button_to t(:export_to_google_drive), volunteers_to_google_drive_path(:volunteers_ids => @volunteers)
+    
+    - if can? :staff, :export
+      .bloc.ligne
+        %span{id: 'titre175'}
+          %b
+            = t(:mailing_list)
+            - if @flag_inactive
+              %b{:style => 'color: blue'}
+                ▲
+                = Volunteer.model_name.human :count => 2
+                = t :not_active, :count => 2
+                = t :included, :count => 2
+        
+        .bloc
+          %textarea{:cols => 120, :rows => 8}= @mailing_list
+    

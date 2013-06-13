@@ -1,0 +1,13 @@
+%table.index
+  %tr
+    %th= Certificate.human_attribute_name(:training)
+    %th= Certificate.human_attribute_name(:number)
+    %th= Certificate.human_attribute_name(:issued_on)
+    %th
+
+  - certificates.each do |certificate|
+    %tr
+      %td= certificate.training
+      %td= certificate.number
+      %td= certificate.issued_on
+      %td.link= link_to t(:show), volunteer_certificate_path(:volunteer_id => @volunteer.id, :id => certificate.id)

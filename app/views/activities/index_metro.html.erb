@@ -1,0 +1,167 @@
+<div id = "page_metro">
+
+  <div id = "legende">
+    <table>
+      <tr>
+        <% i = 0 %>
+        <% Department.all.each do |department| %>
+          <% if i%4 == 0 && i != 0 %>
+            </tr>
+            <tr>
+          <% end %>
+          <td width = '5%' style = "background: #<%=department.color.hex%>"></td>
+          <td width = '20%' style = 'color: black; padding-left: 1em; padding-right: 2em'>
+            <%= department %>
+          </td>
+          <% i += 1 %>
+        <% end %>
+        <% while i%4 != 0 %>
+          <% i += 1 %>
+          <td width = '5%'></td>
+          <td width = '20%'></td>
+        <% end %>
+      </tr>
+    </table>
+  </div>
+
+  <% table = [] %>
+  <% @activities.each do |a| %>
+    <% table << a %>
+  <% end %>
+
+  <div id = 'new_ligne'>
+    <% i = 0 %>
+    <% unless table[i].nil? %>
+      <div id='case_mois_annee' class='activity'>
+        <div id='mois'>  <%= t(table[i].starts_at.strftime("%B")) %> </div>
+        <div id='annee'> <%= table[i].starts_at.year %>              </div>
+      </div>
+    <% end %>
+    <% compteur_case = 1 %>
+    <% (0..table.count-1).each do %>
+      <% activity = table[i] %>
+      <% if compteur_case%3 == 0 && compteur_case != 0 %> <!-- passage à la ligne si nécessaire -->
+        </div>
+        <div id = 'new_ligne'>
+      <% end %>
+      <% bgcouleur = "background: radial-gradient(ellipse at top right, white, ##{activity.department.color.hex}, ##{activity.department.color.hex});" %>
+      <% bgcouleur = "background: radial-gradient(ellipse at top right, white, gray, gray); opacity: 0.5" if activity.ends_at < DateTime.now %>
+      <div id='case' class='activity' style="<%= bgcouleur %>">
+        <%= link_to(activity_metro_path(activity), style: 'color: inherit') do %>
+          <div id='date_service'>
+            <div id='clear_left'></div>
+            <div id='date'>
+              <%= "#{t activity.starts_at.strftime('%A')} #{activity.days_to_s}" %>
+            </div>
+            <div id = 'service'>
+              <%= activity.department.short_name %>
+            </div>
+            <div id = 'clear_left'></div>
+          </div>
+          <div id = 'titre' >
+            <%= activity.name %>
+          </div>
+          <div id = 'infos' >
+            <dl>
+              <dt>heures :</dt>
+              <dd><%=activity.heures_to_s%></dd>
+            </dl>
+            <% if activity.rendezvous %>
+              <dl>
+                <dt>rdv :</dt>
+                <dd><%=activity.rendezvous%></dd>
+              </dl>
+            <% end %>
+            <% if activity.place %>
+              <dl>
+                <dt>lieu :</dt>
+                <dd><%=activity.place%></dd>
+              </dl>
+            <% end %>
+          </div>
+          
+          <div id='separation'>
+            <%= ActNeed.model_name.human count: 2 %>
+            &
+            <%= Registration.model_name.human count: 2 %>
+          </div>
+          
+          <div id='beis'>
+            <ul>
+              <% activity.registrations.where(act_need_id: nil).each do |registration| %>
+                <li class='vol'>
+                  <% if registration.registration_status %>
+                    <%= registration.registration_status.short_name %>
+                    ─
+                  <% end %>
+                  <%= registration.to_short_s %>
+                </li>
+              <% end %>
+              <% activity.act_needs.each do |act_need| %>
+                <li class='an'><%= act_need %></li>
+                <ul>
+                  <% activity.registrations.where(act_need_id: act_need.id).each do |registration| %>
+                    <li class='vol'><%= registration.to_short_s %></li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </ul>
+          </div>
+            
+          <% unless activity.description.empty? %>
+            <div id='separation'>
+              <%= Activity.human_attribute_name(:description) %>
+            </div>
+            <div id='description'>
+              <% activity.description.lines do |line| %>
+                <%= line %>
+                <br/>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+<!--      <div style = 'height: 16px'>
+        <%- emails = [] %>
+        <%- activity.volunteers.select(:email).each {|v| emails << v.email } %>
+        <% if current_user.email.in?(emails) %>
+          <img style = 'position: absolute; margin-left: 348px; margin-top: -16px' src = '/icons/bist-01.png' title = 'inscrit'/></img>
+        <% end %>  
+          <!-- <img style = "position: absolute; margin-left: 0px; margin-top: -16px;" src = "/icons/bist-02.png" title = "nouveau"></img> -->
+          <!-- <img style = "position: absolute; margin-left: 174px; margin-top: -16px;" src = "/icons/bist-03.png" title = "urgent / important"></img> -->
+<!--       </div>-->
+      <% unless (next_activity = table[i+1]).nil? %>
+        <% if activity.starts_at.month != next_activity.starts_at.month || activity.starts_at.year != next_activity.starts_at.year %>
+          <% compteur_case = 3 %>
+          <% if compteur_case%3 == 0 && compteur_case != 0 %> <!-- passage à la ligne si nécessaire -->
+            </div>
+            <div id='new_ligne'>
+          <% end %>
+          <div id='case_mois_annee' class='activity'>
+            <div id='mois'>
+              <%= t(next_activity.starts_at.strftime("%B")) %>
+            </div>
+            <div id='annee'>
+              <%= next_activity.starts_at.year %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <% i += 1 %>
+      <% compteur_case += 1 %>
+    <% end %>
+    <% if compteur_case%3 == 0 %>
+      </div>
+      <div id='new_ligne'>
+    <% end %>
+      
+    <% if can? :create, Activity %>
+      <!-- lien -->
+      <div id='case_lien' class='activity'>
+        <br/>
+        <br/>
+        <br/>
+        <%= link_to t(:manage), activities_path %>
+      </div>
+    <% end %>
+  </div>

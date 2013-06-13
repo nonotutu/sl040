@@ -1,0 +1,67 @@
+#page
+  #table_form
+    = form_tag 'generate_accdoc_from_scratch' do
+      %table
+        %tr
+          %td document :
+          %td
+            = radio_button_tag 'type', 'devis', default: true
+            devis
+            = radio_button_tag 'type', 'facture'
+            facture
+            = radio_button_tag 'type', 'rappel'
+            rappel
+        %tr
+          %td= "#{Department.model_name.human} :"
+          %td= collection_select :department, :id, Department.all, :id, :name, include_blank: true
+        %tr
+          %td adresse :
+          %td= text_area_tag 'adresse', '', rows: 4, cols: 32
+        %tr
+          %td lieu :
+          %td= text_field_tag 'lieu', '', size: 12
+        %tr
+          %td date :
+          %td= date_select 'date', ''
+        %tr
+          %td référence :
+          %td= text_field_tag 'reference', '', size: 8
+        %tr
+          %td événement :
+          %td= text_field_tag 'evt_nom', '', size: 32
+        %tr
+          %td lieu :
+          %td= text_field_tag 'evt_lieu', '', size: 32
+        %tr
+          %td dates & heures :
+          %td= text_area_tag 'evt_dh', '', rows: 3, cols: 32
+        %tr
+          %td contact :
+          %td= text_area_tag 'contact', '', rows: 3, cols: 32
+        %tr
+          %td numéro :
+          %td= text_field_tag 'numero', '', size: 8
+        %tr
+          %td date facture initiale :
+          %td= date_select 'date_rappel_0', '', include_blank: true, default: nil
+        %tr
+          %td date premier rappel :
+          %td= date_select 'date_rappel_1', '', include_blank: true, default: nil
+        %tr
+          %td date second rappel :
+          %td= date_select 'date_rappel_2', '', include_blank: true, default: nil
+        %tr
+          %td items :
+          %td
+            - 4.times do |i|
+              = text_field_tag 'name'+i.to_s, '', size: 24
+              = number_field_tag 'qty'+i.to_s, '', size: 2
+              = number_field_tag 'price'+i.to_s, '', size: 4
+              = radio_button_tag 'kind'+i.to_s, 'euro', default: true
+              €
+              = radio_button_tag 'kind'+i.to_s, 'pourcent'
+              \%
+              %br
+        %tr
+          %td
+          %td= submit_tag 'Générer document'

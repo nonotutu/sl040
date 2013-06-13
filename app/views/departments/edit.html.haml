@@ -1,0 +1,11 @@
+%h1
+  = t(:editing)
+  %b
+    = @department
+
+%div.one
+  = render 'form'
+
+%div.one
+  .links
+    = link_to t(:back), department_path

@@ -1,0 +1,77 @@
+#page
+
+  .bloc.ligne
+  
+    %span{id: 'titre250'}
+      %b
+        = @item
+
+    .bloc
+      #table_show
+        %table
+          - ['category', 'nature', 'produit', 'condition', 'disposable'].each do |attribute|
+            %tr
+              %td= Item.human_attribute_name(attribute)
+              %td= @item.send(attribute)
+          %tr
+            %td= Item.human_attribute_name(:supplier)
+            %td
+              - if @item.supplier
+                = link_to @item.supplier, supplier_path(@item.supplier)
+
+    .bloc
+      #links
+        - if can? :edit, Item
+          = link_to t(:edit), edit_item_path(@item)
+        - if can? :destroy, Item
+          = link_to t(:destroy), @item, method: :delete, data: { confirm: 'Are you sure?' }
+        = link_to t(:back), items_path
+
+        
+    .bloc.ligne
+    
+      %span{id: 'titre175'}
+        %b
+          = Container.model_name.human count: 2
+
+      .bloc
+        #texte.t1
+          %ul
+            - @item.contents.each do |content|
+              %li
+                %b
+                  = "*" if content.unitary
+                  = content.quantity
+                - while content.container do
+                  %b ⊂ 
+                  = link_to content.container, container_contents_path(content.container.id)
+                  = "× #{content.container.quantity}" if content.container.quantity > 1
+                  - content = content.container
+
+      .bloc
+        #texte.t2
+          total :
+          %b
+            = @item.count
+      
+    - if @item.disposable == false
+      .bloc.ligne
+      
+        %span{id: 'titre175'}
+          %b
+            = Purchase.model_name.human count: 2
+
+        .bloc
+          #texte.t1
+            %ul
+              - @item.purchases.each do |purchase|
+                %li
+                  = "#{purchase.purchased_on} ─ "
+                  = link_to "#{purchase.number}", purchase
+
+        .bloc
+          #links
+            - if can? :create, Purchase
+              = link_to t(:new_purchase), new_purchase_path(item_id: @item.id)
+
+

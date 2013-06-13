@@ -1,0 +1,26 @@
+= simple_form_for @training do |f|
+  - if @training.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@training.errors.count, "error")} prohibited this training from being saved:"
+      %ul
+        - @training.errors.full_messages.each do |msg|
+          %li= msg
+          
+  #table_form
+    %table
+      %tr
+        %td= f.label :pos
+        %td= f.input :pos, label: false
+      %tr
+        %td= f.label :short_name
+        %td= f.input :short_name, label: false
+      %tr
+        %td= f.label :name
+        %td= f.input :name, label: false
+      %tr
+        %td= f.label :active
+        %td= f.check_box :active
+      %tr
+        %td
+        %td
+          = f.submit t(:save)

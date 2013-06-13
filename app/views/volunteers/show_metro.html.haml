@@ -1,0 +1,85 @@
+#page_metro
+  
+  .bloc{align: 'center'}
+    
+    %table.mep2c{style: 'margin-top: 12px; box-shadow: -4px 4px 4px gray; max-width: 80%'}
+      %tr.mep2c{style: 'background: radial-gradient(ellipse at top right, white, green, green, green)'}
+        %td.mep2c{colspan: 2, style: 'text-align: center'}
+          .bloc
+            #texte.t5{style: 'color: white;'}
+              %b
+                = @volunteer.first_name
+                = @volunteer.last_name
+       
+      -#%tr.mep2c{style: 'background: lightgreen'}
+      %tr.mep2c{style: 'background: linear-gradient(to bottom, white, lightgreen 16px)'}
+        %td.mep2c
+            
+          .bloc
+            #info
+              %dl
+                %dt
+                  %img{src: '/icons/birthday_cake.png'}
+                %dd
+                  - if @volunteer.date_of_birth
+                    #texte.t3
+                      = @volunteer.sex == 1 ? "née le" : "né le"
+                      = @volunteer.birthday
+                    #texte.t2
+                      anniversaire dans
+                      = nbj = @volunteer.days_to_birthday
+                      = "jour" + ( nbj > 1 ? "s" : "" )
+           
+          .bloc
+            #info
+              %dl
+                %dt
+                  %img{src: '/icons/phone.png'}
+                %dd
+                  #texte.t3
+                    = @volunteer.cell_phone
+                  #texte.t2
+                    = @volunteer.email
+           
+          .bloc
+            #info
+              %dl
+                %dt
+                  %img{src: '/icons/cross.png'}
+                %dd
+                  #texte
+                    #texte.t1
+                      est à la Croix-Rouge depuis
+                    #texte.t2
+                      le
+                      = @volunteer.cr_joined_on.strftime("%d / %m / %Y") if @volunteer.cr_joined_on
+                    %br
+                    #h2
+                      Services :
+                    #texte.t2
+                      %ul
+                        - @volunteer.departments.each do |d|
+                          %li
+                            = d.name
+                            %br
+         
+        %td.mep2c
+          .bloc
+            #info
+              %dl
+                %dt
+                  %img{src: '/icons/certificate.png'}
+                %dd
+                  - @certificates.each do |c|
+                    - if i = c.issued_on
+                      = c.issued_on.year
+                      ─
+                    = c.training.name
+                    %br
+                    
+    
+  .bloc{align: 'center'}
+    #links
+      - if can? :read, @volunteer
+        = link_to t(:more), volunteer_path(@volunteer)
+      = link_to t(:list), volunteers_metro_path

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  volunteer_id: 1
+  activity_id: 1
+  starts_at: 2013-04-02 12:31:56
+  ends_at: 2013-04-02 12:31:56
+  rendezvous_place: MyString
+
+two:
+  volunteer_id: 1
+  activity_id: 1
+  starts_at: 2013-04-02 12:31:56
+  ends_at: 2013-04-02 12:31:56
+  rendezvous_place: MyString

@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cr_number: 
+  sex: 
+  first_name: 
+  last_name: 
+  date_of_birth: 
+  place_of_birth: MyString
+  string,: MyString
+  email: 
+  land_phone: 
+  cell_phone: 
+  cr_joined_on: 2013-03-15
+
+two:
+  cr_number: 
+  sex: 
+  first_name: 
+  last_name: 
+  date_of_birth: 
+  place_of_birth: MyString
+  string,: MyString
+  email: 
+  land_phone: 
+  cell_phone: 
+  cr_joined_on: 2013-03-15

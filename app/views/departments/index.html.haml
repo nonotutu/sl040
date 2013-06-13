@@ -1,0 +1,27 @@
+%h1
+  = t(:listing)
+  %b
+    = Department.model_name.human :count => 2
+
+%div.one
+  %table.index
+    %tr
+      %th= Department.human_attribute_name(:short_name)
+      %th= Department.human_attribute_name(:name)
+      %th= Department.human_attribute_name(:color)
+      %th #⚘
+      %th
+
+    - @departments.each do |department|
+      %tr
+        %td= department.short_name
+        %td= department.name
+        %td{style: "color: ##{department.color.hex}"}= "████"
+        %td.mono_droite
+          %i= department.volunteers.count
+        %td.link= link_to t(:show), department
+
+%div.one
+  .links
+    - if can? :create, Department
+      = link_to t(:new_department), new_department_path

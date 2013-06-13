@@ -1,0 +1,229 @@
+
+table
+  tr
+    td
+      &.mono_droite
+        font-family: monospace
+        text-align: right
+      &.centre
+        text-align: center
+    th
+      &.mono_droite
+        font-family: monospace
+        text-align: right
+
+.c1
+  color: red
+
+a.base
+  text-decoration: none
+  &:hover
+    background: none
+    
+a.white
+  @extend a.base
+  color: white
+  &:visited
+    color: white
+  &:hover
+    color: black
+    text-shadow: 1px 1px 1px white, -1px -1px 1px white, -1px 1px 1px white, 1px -1px 1px white
+
+a.black
+  @extend a.base
+  color: black
+  &:visited
+    color: black
+  &:hover
+    color: white
+    text-shadow: 1px 1px 1px black, -1px -1px 1px black, -1px 1px 1px black, 1px -1px 1px black
+        
+
+    
+#page
+  //border: 2px solid red
+  //border-bottom: 2px dashed red
+  h1
+    color: blue
+    
+  #titre
+    color: black
+    padding-left: 2em
+    border-top: 2px solid red
+    border-left: 2em solid red
+    border-right: none
+    %i
+      color: red
+    
+  #titre300
+    @extend #titre
+    font-size: 300%
+  #titre250
+    @extend #titre
+    font-size: 250%
+  #titre200
+    @extend #titre
+    font-size: 200%
+  #titre175
+    @extend #titre
+    font-size: 175%
+      
+
+  #table_filter
+    @extend #table_form
+    color: black
+    table
+      border-radius: 0 8px 8px 8px
+      background: lightgrey
+      border-left: 2px solid black
+      border-right: 2px solid black
+      td:nth-child(2n)
+        padding-left: 1em
+        padding-bottom: 0
+        padding-top: 0
+    #filter_titre
+      padding: .2em
+      padding-left: .5em
+      padding-right: .5em
+      border-right: 2px solid lightgrey
+      border-bottom: 2px solid black
+      border-left: 2px solid black
+      border-radius: 8px 0 0 8px
+      vertical-align: middle
+      float: left
+      font-size: 120%
+      font-weight: bold
+      color: black
+      margin-right: -2px
+      background: lightgrey
+     
+    
+  #table_index
+    table
+      border-collapse: collapse
+      white-space: nowrap
+      tr
+        td, th
+          height: 1em
+          padding-left: .5em
+          padding-right: .5em
+      border-bottom: 4px solid rgb(255,0,0)
+      tr
+        background: rgba(255,255,255,.8)
+        th
+          background: rgb(255,0,0)
+          color: white
+          //b
+          //  font-weight: normal
+          //  font-size: 120%
+          //.framed
+          //  border: 1px solid white
+          //  padding: 0 .2em 0 .2em
+          //  border-radius: .2em
+          //a
+          //  extend a.base
+          //  &:hover
+          //    color: white
+        td
+          font-size: 100%
+        td:nth-child(2n)
+          border-right: 1px solid rgb(255,0,0)
+        td:nth-child(2n+1)
+          border-right: 1px solid rgb(255,0,0)
+        td.link
+          border: none
+      tr:nth-child(2n+1)
+        background: rgba(224,224,224,.8)
+      tr.selected
+        background: purple
+        color: white
+        a
+          @extend a.white
+      a
+        @extend a.black
+
+  #table_show
+    table
+      padding: 0
+      margin: 0
+      border-spacing: .6em
+      tr
+        td:first-child
+          text-align: right
+          color: rgb(255,0,0)
+          font-weight: bold
+          font-size: 100%
+          padding-left: 1em
+        td:nth-child(2)
+          padding-left: 1em
+          font-size: 120%
+          color: rgb(0,0,0)
+          line-height: 1em
+    a
+      @extend a.black
+          
+  #table_form
+    table
+      white-space: nowrap
+      border-spacing: .5em
+      input, textarea
+        font-size: 120%
+      select
+        font-size: 120%
+    td:nth-child(2n+1)
+      text-align: right
+      font-size: 100%
+      font-weight: bold
+      color: red
+      padding-left: 2em
+    td:nth-child(1)
+      padding-left: 1em
+    td:nth-child(2n)
+      padding-left: 1em
+      line-height: 1em
+    td:last-child
+      padding-right: 1em
+    tr:last-child
+      td:last-child
+        text-align: right
+        input
+          border: 1px solid red
+          border-radius: 4px
+          margin-left: 8px
+          padding-left: .4em
+          padding-right: .4em
+    input[type="radio"], input[type="checkbox"]
+      margin-left: 1em
+      margin-right: .4em
+    &.compact
+      table
+        border-spacing: 0
+
+#texte
+  font-size: 100%
+  line-height: 1em
+  a
+    @extend a.black
+  ul
+    padding-left: 32px
+  &.t1
+    font-size: 120%
+  &.t2
+    font-size: 140%
+  &.t3
+    font-size: 160%
+  &.t4
+    font-size: 180%
+  &.t5
+    font-size: 200%
+  #h
+    text-decoration: underline
+    line-height: 1em
+  #h1
+    @extend #h
+    font-size: 120%
+  #h2
+    @extend #h
+    font-size: 140%
+    
+

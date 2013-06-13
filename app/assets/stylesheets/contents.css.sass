@@ -1,0 +1,64 @@
+a.black
+  @extend a.base
+  color: black
+  &:visited
+    color: black
+  &:hover
+    color: white
+    text-shadow: 1px 1px 1px black, -1px -1px 1px black, -1px 1px 1px black, 1px -1px 1px black
+        
+
+#table_contents
+  table
+    border-collapse: collapse
+    tr
+      td, th
+        height: 1em
+        padding-left: .5em
+        padding-right: .5em
+    tr
+      &.container
+        td
+          background: black
+          color: white
+          &.first
+            border-left: 1px solid black
+          &.container
+            font-weight: bold
+          &.link
+            background: white
+            a
+              @extend a.black
+          &.decal
+            width: 32px
+            background: white
+          &.pos
+            @extend td.mono_droite
+            width: 32px
+            font-size: 75%
+            color: gray
+            background: white
+      &.contenu
+        td
+          color: black
+          &.first
+            border-left: 1px solid black
+          &.decal
+            width: 32px
+          &.link
+            a
+              @extend a.black
+          &.pos
+            @extend td.mono_droite
+            width: 32px
+            font-size: 75%
+            color: gray
+        &:nth-child(2n+1)
+          td.contenu
+            background: rgb(223,223,223)
+        &:nth-child(2n)
+          td.contenu
+            background: white
+        &:last-child
+          td.contenu
+            border-bottom: 1px solid black

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SL 040</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id='main_menu'>
+  <%= render 'menus/main_menu' %>
+  <hr/>
+</div>
+<div id='sign_menu'>
+  <%= render 'menus/sign_menu' %>
+</div>
+<div id='main_menu'>
+  <%= render 'menus/staff_menu' %>
+</div>
+
+<%= render 'layouts/notices_and_alerts' %>
+
+<%= yield %>
+
+</body>
+</html>

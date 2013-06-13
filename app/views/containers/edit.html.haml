@@ -1,0 +1,14 @@
+#page
+  
+  .bloc.ligne
+  
+    %span{id: 'titre250'}
+      %b
+        = @container
+
+    .bloc
+      = render 'form'
+
+    .bloc
+      #links
+        = link_to t(:back), @container
